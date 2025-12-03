@@ -209,10 +209,7 @@ jobs:
           git config --global --add safe.directory "${CYGPATH_GITHUB_WORKSPACE}" &&
           export PATH=/usr/local/bin:/usr/bin:$(cygpath ${SYSTEMROOT})/system32 &&
           source ~/ccache.conf &&
-          ./waf configure --board=sitl --debug &&
-          ./waf copter &&
-          mkdir -p artifacts &&
-          cp build/sitl/bin/arducopter.exe artifacts/ &&
+          Tools/scripts/cygwin_build.sh &&
           ccache -s
 
       - name: Check build files
