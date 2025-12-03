@@ -199,7 +199,7 @@ jobs:
           ln -s ccache /usr/local/bin/x86_64-pc-cygwin-gcc &&
           ln -s ccache /usr/local/bin/x86_64-pc-cygwin-g++
 
-      - name: Build SITL
+    - name: Build SITL
         env:
           PATH: /usr/bin:$(cygpath ${SYSTEMROOT})/system32
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
