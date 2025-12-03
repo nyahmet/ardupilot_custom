@@ -199,7 +199,7 @@ jobs:
           ln -s ccache /usr/local/bin/x86_64-pc-cygwin-gcc &&
           ln -s ccache /usr/local/bin/x86_64-pc-cygwin-g++
 
-      - name: Build SITL
+    - name: Build SITL
         env:
           PATH: /usr/bin:$(cygpath ${SYSTEMROOT})/system32
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
@@ -209,7 +209,10 @@ jobs:
           git config --global --add safe.directory "${CYGPATH_GITHUB_WORKSPACE}" &&
           export PATH=/usr/local/bin:/usr/bin:$(cygpath ${SYSTEMROOT})/system32 &&
           source ~/ccache.conf &&
-          Tools/scripts/cygwin_build.sh &&
+          ./waf configure --board=sitl --debug &&
+          ./waf copter &&
+          mkdir -p artifacts &&
+          cp build/sitl/bin/arducopter.exe artifacts/ &&
           ccache -s
 
       - name: Check build files
